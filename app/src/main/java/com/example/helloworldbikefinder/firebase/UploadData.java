@@ -22,26 +22,21 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class UploadData {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private static String latitude;
-    private static String longitude;
-    private static String downloadUrl;
-    private static byte[] img;
+    private String latitude;
+    private String longitude;
+    private String downloadUrl;
+    private byte[] img;
 
     public UploadData(byte[] img, String latitude, String longitude) {
         setLatitude(latitude);
         setLongitude(longitude);
         setImg(img);
+        upload();
     }
 
-    public UploadData() {
-        this(img, latitude, longitude);
-    }
-
-    public static void main(String[] args) {
-        UploadData upload = new UploadData();
-
+    public void upload() {
         // Uploads the byte array of the image to firebase storage, which also returns downloadUrl
-        upload.uploadToFirebaseStorage(img);
+        uploadToFirebaseStorage(img);
 
         // Creates bike map consisting of its latitude, longitude, and the now acquired downloadUrl
         Map<String, Object> bike = new HashMap<>();
@@ -50,7 +45,7 @@ public class UploadData {
         bike.put("downloadUrl", downloadUrl);
 
         // Adds the bike object to the Cloud Firestore database
-        upload.addToDatabase(bike);
+        addToDatabase(bike);
 
     }
 
