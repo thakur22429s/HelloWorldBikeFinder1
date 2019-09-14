@@ -29,12 +29,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:19.0.1'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-<<<<<<< HEAD
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
     implementation 'com.google.firebase:firebase-firestore:21.1.1'
     implementation 'com.google.firebase:firebase-storage:19.0.1'
-=======
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.material:material:1.0.0'
->>>>>>> 98fb76881b3fa1e7d69645d74e40e1e42705ad40
 }

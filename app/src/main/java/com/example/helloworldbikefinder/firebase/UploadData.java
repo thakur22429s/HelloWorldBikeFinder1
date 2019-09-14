@@ -5,7 +5,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.helloworldbikefinder.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -23,10 +22,10 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class UploadData {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String latitude;
-    private String longitude;
-    private String downloadUrl;
-    private byte[] img;
+    private static String latitude;
+    private static String longitude;
+    private static String downloadUrl;
+    private static byte[] img;
 
     public UploadData(byte[] img, String latitude, String longitude) {
         setLatitude(latitude);
@@ -57,7 +56,7 @@ public class UploadData {
 
     public void addToDatabase(Map bike) {
         // Add a new document with a generated ID
-        db.collection("users")
+        db.collection("bikes")
                 .add(bike)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -108,11 +107,11 @@ public class UploadData {
     }
 
     public void setDownloadUrl(String downloadUrl) {
-        UploadData.downloadUrl = downloadUrl;
+        downloadUrl = downloadUrl;
     }
 
     public void setImg(byte[] img) {
-        UploadData.img = img;
+        img = img;
     }
 
 
