@@ -107,11 +107,11 @@ public class UploadData {
     }
 
     public void setDownloadUrl(String downloadUrl) {
-        downloadUrl = downloadUrl;
+        this.downloadUrl = downloadUrl;
     }
 
     public void setImg(byte[] img) {
-        img = img;
+        this.img = img;
     }
 
 
