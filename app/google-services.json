@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "316781475603",
+    "firebase_url": "https://helloworldbikefinder.firebaseio.com",
+    "project_id": "helloworldbikefinder",
+    "storage_bucket": "helloworldbikefinder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316781475603:android:1c6d0601e52c83fbdf0ce6",
+        "android_client_info": {
+          "package_name": "com.example.helloworldbikefinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316781475603-pgfpku306mu6087lt8od3ikj6ga8k4do.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCncRv00aL9RFZ5sy9Gc0h67BewyRbdnLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316781475603-pgfpku306mu6087lt8od3ikj6ga8k4do.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
