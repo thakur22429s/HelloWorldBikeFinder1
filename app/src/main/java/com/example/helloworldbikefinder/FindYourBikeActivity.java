@@ -1,5 +1,6 @@
 package com.example.helloworldbikefinder;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -9,23 +10,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class FindYourBikeActivity extends AppCompatActivity {
+
+    ListView bicycleListView;
+    String[] locations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_your_bike);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
+        Resources res = getResources();
+        bicycleListView = (ListView) findViewById(R.id.bicycleListView);
+        locations = res.getStringArray(R.array.locations);
+
+        bicycleListView.setAdapter(new ArrayAdapter<String>(this, R.layout.bicycle_list_view_detail, locations) {
+
         });
     }
 }
