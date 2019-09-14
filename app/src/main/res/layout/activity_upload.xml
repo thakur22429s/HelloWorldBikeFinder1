@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background = "@drawable/bike"
+    tools:context=".Upload"
+    android:background="@drawable/bike"
+
     >
 
     <TextView
-        android:layout_width="261dp"
-        android:layout_height="8dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="356dp"
-        android:layout_marginEnd="69dp" />
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
 
 </RelativeLayout>
