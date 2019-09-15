@@ -1,5 +1,6 @@
 package com.example.helloworldbikefinder.firebase;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
 
@@ -8,12 +9,14 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -26,9 +29,9 @@ public class UploadData {
     private String latitude;
     private String longitude;
     private String downloadUrl;
-    private byte[] img;
+    private File img;
 
-    public UploadData(byte[] img, String latitude, String longitude) {
+    public UploadData(File img, String latitude, String longitude) {
         setLatitude(latitude);
         setLongitude(longitude);
         setImg(img);
@@ -70,18 +73,15 @@ public class UploadData {
                 });
     }
 
-    public void uploadToFirebaseStorage(byte[] img) {
+    public void uploadToFirebaseStorage(File img) {
         String path = "bikeImages/" + UUID.randomUUID() + ".png";
         StorageReference bikeRefs = storage.getReference(path);
 
-        UploadTask uploadTask = bikeRefs.putBytes(img);
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Uri url = taskSnapshot.getUploadSessionUri();
-                downloadUrl = url.toString();
-            }
-        });
+        UploadTask uploadTask = bikeRefs.putFile(android.net.Uri.parse(img.toURI().toString()));
+        Task task = bikeRefs.getDownloadUrl();
+        downloadUrl = task.toString();
+
+
     }
 
     public String getLatitude() {
@@ -108,7 +108,7 @@ public class UploadData {
         this.downloadUrl = downloadUrl;
     }
 
-    public void setImg(byte[] img) {
+    public void setImg(File img) {
         this.img = img;
     }
 

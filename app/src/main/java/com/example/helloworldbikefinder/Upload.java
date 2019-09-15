@@ -36,10 +36,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.helloworldbikefinder.firebase.UploadData;
 import com.google.firebase.FirebaseApp;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 
 public class Upload extends AppCompatActivity {
-    private byte[] img;
+    private File img;
     private LocationManager locationManager;
     private LocationListener locationListener;
     private String latitude;
@@ -73,19 +78,33 @@ public class Upload extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream("tmpimg.png");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+        try {
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //imageView.setImageBitmap(bitmap); //For displaying the image after
-        img = convertBitmaptoBytes(bitmap);
+        img = new File("tmpimg.png");
         uploadData();
         System.out.println("3");
     }
 
     public void uploadData() {
-        //acquireLocation();
+        acquireLocation();
         UploadData uploadData = new UploadData(img, latitude, longitude);
     }
 
 
     public void acquireLocation() {
+
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
