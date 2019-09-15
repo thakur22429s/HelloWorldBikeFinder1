@@ -42,10 +42,10 @@ public class FindYourBikeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_your_bike);
 
-        collectAllData();
-        createTabs();
+        //collectAllData();
+        //createTabs();
 
-        for (int i = 0; i < data.size(); i++) {
+        /*for (int i = 0; i < data.size(); i++) {
             String url = (String) data.get(i).get("downloadUrl");
             try {
                 BufferedInputStream in = new BufferedInputStream(new URL(url).openStream());
@@ -59,15 +59,16 @@ public class FindYourBikeActivity extends AppCompatActivity {
                 // do nothing here
                 // hope to God it fucking works and there are no exceptions
             }
-        }
+        }*/
 
         // bicycleScrollView = (ScrollView) findViewById(R.id.bicycleScrollView);
         ImageView imageView1 = (ImageView) findViewById(R.id.imageView1);
-        imageView1.setImageDrawable(getResources().getDrawable(R.drawable.bike));
-
+        //imageView1.setImageDrawable(getResources().getDrawable(R.drawable.logo));
+        int id = getResources().getIdentifier("com.example.helloworldbikefinder:bike", null, null);
+        imageView1.setImageResource(id);
     }
 
-   public void collectAllData() {
+   /*public void collectAllData() {
         AccessData access = new AccessData();
         data = access.accessData();
     }
@@ -75,12 +76,12 @@ public class FindYourBikeActivity extends AppCompatActivity {
     /**
      * Creates tabs for each object. Needs functionality for constant scrolling.
      */
-    public void createTabs() {
+   /* public void createTabs() {
         // updateUI to erase previous tabs
         // Create table layout
         for (int i = 0; i < data.size(); i++) {
             bikeTabs.add(new BikeTab(data.get(i), docIDs.get(i)));
         }
+        }*/
 
-    }
 }

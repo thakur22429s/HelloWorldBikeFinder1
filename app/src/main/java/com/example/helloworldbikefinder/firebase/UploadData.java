@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -36,6 +37,8 @@ public class UploadData {
 
     public void upload() {
         // Uploads the byte array of the image to firebase storage, which also returns downloadUrl
+
+
         uploadToFirebaseStorage(img);
 
         // Creates bike map consisting of its latitude, longitude, and the now acquired downloadUrl

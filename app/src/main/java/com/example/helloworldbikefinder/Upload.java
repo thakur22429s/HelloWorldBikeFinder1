@@ -34,6 +34,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 import com.example.helloworldbikefinder.firebase.UploadData;
+import com.google.firebase.FirebaseApp;
 
 import java.nio.ByteBuffer;
 
@@ -55,6 +56,8 @@ public class Upload extends AppCompatActivity {
         // The following follows https://www.youtube.com/watch?v=ondCeqlAwEI
         Button cameraBtn = (Button) findViewById(R.id.cameraButton);
         //imageView = (ImageView)findViewById(R.id.imageView); // For displaying image after
+
+        FirebaseApp.initializeApp(this);
 
         System.out.println("1");
 
