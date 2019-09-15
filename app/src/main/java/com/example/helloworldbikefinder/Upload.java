@@ -79,11 +79,11 @@ public class Upload extends AppCompatActivity {
     }
 
     public void uploadData() {
-        acquireLocation();
-        UploadData uploadData = new UploadData(img, latitude, longitude);
-        uploadData.upload();
+        //acquireLocation();
+        UploadData uploadData = new UploadData(img, "10", "10");
     }
 
+    /**
     public void acquireLocation() {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationListener = new LocationListener() {
@@ -122,7 +122,7 @@ public class Upload extends AppCompatActivity {
             }
             }
         }
-
+        **/
 
 
 
