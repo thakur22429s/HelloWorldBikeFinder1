@@ -78,52 +78,25 @@ public class UploadData {
 
     public void uploadToFirebaseStorage(File img) {
         String path = "bikeImages/" + UUID.randomUUID() + ".png";
-        StorageReference storageRef = storage.getReference();
-        //final StorageReference imageRef = storageRef.child(path);
         StorageReference bikeRefs = storage.getReference(path);
         UploadTask uploadTask = bikeRefs.putFile(android.net.Uri.parse(img.toURI().toString()));
+        StorageReference storageRef = storage.getReference();
+        //final StorageReference imageRef = storageRef.child(path);
 
-        storageRef.child("bikeImages").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
-            public void onSuccess(Uri uri) {
-                // Got the download URL for "YourFolderName/YourFile.pdf"
-                // Add it to your database
-                downloadUrl = uri.toString();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });
-
-        /**
-        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (!task.isSuccessful()) {
-                    System.out.println("\n\nEXCEPTION\n\n");
-                    throw task.getException();
-                }
-
-
-                // Continue with the task to get the download URL
-                System.out.println("\n\nGETTING DOWNLOAD\n\n");
-                return ref.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
-                    System.out.println("\n\nDOWNLOAD ACCESSED\n\n");
-                    Uri downloadUri = task.getResult();
-                    downloadUrl = downloadUri.toString();
-                } else {
-                    System.out.println("\n\nNo download url accessed\n\n");
-                }
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                final Task<Uri> downloadUri = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                downloadUri.addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        downloadUrl = downloadUri.getResult().toString();
+                    }
+                });
             }
         });
-         **/
+           
+
 
 
 
