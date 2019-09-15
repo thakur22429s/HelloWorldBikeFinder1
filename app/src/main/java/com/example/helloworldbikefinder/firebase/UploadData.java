@@ -77,7 +77,10 @@ public class UploadData {
 
     public void uploadToFirebaseStorage(File img) {
         String path = "bikeImages/" + UUID.randomUUID() + ".png";
-        final StorageReference bikeRefs = storage.getReference(path);
+        StorageReference reference = storage.getReference();
+        final StorageReference bikeRefs = reference.child(path);
+        //final StorageReference ref = storageRef.child("images/mountains.jpg");
+        //uploadTask = ref.putFile(file);
 
         UploadTask uploadTask = bikeRefs.putFile(android.net.Uri.parse(img.toURI().toString()));
 
