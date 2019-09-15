@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.example.helloworldbikefinder.firebase.AccessData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.FirebaseApp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;

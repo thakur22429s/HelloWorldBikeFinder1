@@ -57,8 +57,6 @@ public class Upload extends AppCompatActivity {
         Button cameraBtn = (Button) findViewById(R.id.cameraButton);
         //imageView = (ImageView)findViewById(R.id.imageView); // For displaying image after
 
-        FirebaseApp.initializeApp(this);
-
         System.out.println("1");
 
         cameraBtn.setOnClickListener(new View.OnClickListener() {
