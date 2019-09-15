@@ -61,9 +61,9 @@ public class FindYourBikeActivity extends AppCompatActivity {
             }
         }
 
-        bicycleScrollView = (ScrollView) findViewById(R.id.bicycleScrollView);
+        // bicycleScrollView = (ScrollView) findViewById(R.id.bicycleScrollView);
         ImageView imageView1 = (ImageView) findViewById(R.id.imageView1);
-        imageView1.setImageBitmap(Bitmap.createScaledBitmap(bitmapImages[1], imageView1.getWidth(), imageView1.getHeight(), false));
+        imageView1.setImageDrawable(getResources().getDrawable(R.drawable.bike));
 
     }
 
