@@ -77,11 +77,9 @@ public class UploadData {
 
     public void uploadToFirebaseStorage(File img) {
         String path = "bikeImages/" + UUID.randomUUID() + ".png";
+        StorageReference bikeRefs = storage.getReference(path);
         StorageReference reference = storage.getReference();
-        final StorageReference bikeRefs = reference.child(path);
-        //final StorageReference ref = storageRef.child("images/mountains.jpg");
-        //uploadTask = ref.putFile(file);
-
+        final StorageReference ref = reference.child(path);
         UploadTask uploadTask = bikeRefs.putFile(android.net.Uri.parse(img.toURI().toString()));
 
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -95,7 +93,7 @@ public class UploadData {
 
                 // Continue with the task to get the download URL
                 System.out.println("\n\nGETTING DOWNLOAD\n\n");
-                return bikeRefs.getDownloadUrl();
+                return ref.getDownloadUrl();
             }
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
