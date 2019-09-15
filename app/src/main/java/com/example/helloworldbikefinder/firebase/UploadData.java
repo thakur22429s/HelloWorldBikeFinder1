@@ -78,21 +78,17 @@ public class UploadData {
 
     public void uploadToFirebaseStorage(File img) {
         String path = "bikeImages/" + UUID.randomUUID() + ".png";
-        StorageReference storageRef = storage.getReference();
-        final StorageReference imageRef = storageRef.child(path);
-        //final StorageReference bikeRefs = storage.getReference(path);
-        //UploadTask uploadTask = bikeRefs.putFile(android.net.Uri.parse(img.toURI().toString()));
+        //StorageReference storageRef = storage.getReference();
+        //final StorageReference imageRef = storageRef.child(path);
+        StorageReference bikeRefs = storage.getReference(path);
+        UploadTask uploadTask = bikeRefs.putFile(android.net.Uri.parse(img.toURI().toString()));
 
-        imageRef.putFile(android.net.Uri.parse(img.toURI().toString())).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(path);
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Log.d(TAG, "onSuccess: uri= "+ uri.toString());
-                        downloadUrl = uri.toString();
-                    }
-                });
+            public void onSuccess(Uri uri) {
+                //do your stuff- uri.toString() will give you download URL\\
+                downloadUrl = uri.toString();
             }
         });
 
