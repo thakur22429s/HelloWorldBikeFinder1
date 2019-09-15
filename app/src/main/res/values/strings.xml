@@ -2,13 +2,4 @@
     <string name="app_name">HelloWorldBikeFinder</string>
     <string name="title_activity_find_your_bike">FindYourBikeActivity</string>
     <string name="action_settings">Settings</string>
-    <string-array name="locations">
-        <item>Lawson Computer Science Building</item>
-        <item>Unknown Location</item>
-        <item>Daddy Mitch\'s Sex Chamber</item>
-        <item>WALC</item>
-        <item>Brown Laboratory of Chemistry</item>
-        <item>Unknown Location</item>
-        <item>Co-Rec</item>
-    </string-array>
 </resources>
