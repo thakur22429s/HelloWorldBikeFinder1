@@ -45,7 +45,7 @@ public class UploadData {
 
         System.out.println("\n\n" + latitude + " " + longitude + "\n\n");
         uploadToFirebaseStorage(img);
-        System.out.println("\n\n" + downloadUrl);
+        System.out.println("\n\n                                    DOWNLOAD URL:" + downloadUrl);
 
         // Creates bike map consisting of its latitude, longitude, and the now acquired downloadUrl
         Map<String, Object> bike = new HashMap<>();
@@ -78,17 +78,22 @@ public class UploadData {
 
     public void uploadToFirebaseStorage(File img) {
         String path = "bikeImages/" + UUID.randomUUID() + ".png";
-        //StorageReference storageRef = storage.getReference();
+        StorageReference storageRef = storage.getReference();
         //final StorageReference imageRef = storageRef.child(path);
         StorageReference bikeRefs = storage.getReference(path);
         UploadTask uploadTask = bikeRefs.putFile(android.net.Uri.parse(img.toURI().toString()));
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(path);
-        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageRef.child("bikeImages").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                //do your stuff- uri.toString() will give you download URL\\
+                // Got the download URL for "YourFolderName/YourFile.pdf"
+                // Add it to your database
                 downloadUrl = uri.toString();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
             }
         });
 
