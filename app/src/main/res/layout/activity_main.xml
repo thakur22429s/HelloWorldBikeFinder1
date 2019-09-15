@@ -17,12 +17,22 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="157dp"
+        android:layout_height="129dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="195dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="501dp"
         android:text="Find your bike" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="157dp"
+        android:layout_height="129dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="229dp"
+        android:layout_marginTop="501dp"
+        android:text="Upload Image" />
 
 </RelativeLayout>
