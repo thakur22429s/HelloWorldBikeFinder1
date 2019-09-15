@@ -25,11 +25,14 @@ public class Upload extends AppCompatActivity {
         Button cameraBtn = (Button)findViewById(R.id.cameraButton);
         //imageView = (ImageView)findViewById(R.id.imageView); // For displaying image after
 
+        System.out.println("1");
+
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, 1);
+                System.out.println("2");
             }
         });
     }
@@ -40,6 +43,7 @@ public class Upload extends AppCompatActivity {
         Bitmap bitmap = (Bitmap)data.getExtras().get("data");
         //imageView.setImageBitmap(bitmap); //For displaying the image after
         byte[] img = convertBitmaptoBytes(bitmap);
+        System.out.println("3");
     }
 
     public byte[] convertBitmaptoBytes(Bitmap bitmap) {

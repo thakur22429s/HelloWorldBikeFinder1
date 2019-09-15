@@ -37,13 +37,13 @@ public class MainActivity extends AppCompatActivity {
     public void openFindYourBikeActivity2(){
         Intent intent = new Intent(this, FindYourBikeActivity.class);
         startActivity(intent);
-        setContentView(R.layout.activity_find_your_bike);
+        //setContentView(R.layout.activity_find_your_bike);
     }
 
     public void openUpload(){
         Intent intent2 = new Intent(this, Upload.class);
         startActivity(intent2);
-        setContentView(R.layout.activity_upload);
+        //setContentView(R.layout.activity_upload);
     }
 
 }
