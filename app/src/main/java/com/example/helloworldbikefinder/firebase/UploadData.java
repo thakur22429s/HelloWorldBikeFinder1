@@ -80,13 +80,7 @@ public class UploadData {
         StorageReference bikeRefs = storage.getReference(path);
 
         UploadTask uploadTask = bikeRefs.putFile(android.net.Uri.parse(img.toURI().toString()));
-        UploadTask.TaskSnapshot taskSnapshot = uploadTask.getResult();
-        Uri uri = taskSnapshot.getUploadSessionUri();
-        downloadUrl = uri.toString();
-
-        /**
-        final StorageReference ref = bikeRefs.child("images/mountains.jpg");
-
+        final StorageReference ref = bikeRefs.child(path);
 
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
@@ -110,7 +104,7 @@ public class UploadData {
                 }
             }
         });
-         **/
+
 
 
     }
