@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.SimpleAdapter;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
@@ -25,6 +26,8 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.grpc.internal.IoUtils;
@@ -38,15 +41,19 @@ public class FindYourBikeActivity extends AppCompatActivity {
     ArrayList<String> docIDs;
     ArrayList<BikeTab> bikeTabs;
 
+    String[] listViewLocation = new String[]{"Location 1", "Location 2", "Location 3", "Location 4", "Location 5"};
+    int[] listViewImage = new int[]{R.drawable.logo, R.drawable.logo, R.drawable.logo, R.drawable.logo, R.drawable.logo};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_your_bike);
 
-        //collectAllData();
-        //createTabs();
+        collectAllData();
+        createTabs();
 
-        /*for (int i = 0; i < data.size(); i++) {
+        /* FOR NOW, FIREBASE DOESN'T WORK.
+        for (int i = 0; i < data.size(); i++) {
             String url = (String) data.get(i).get("downloadUrl");
             try {
                 BufferedInputStream in = new BufferedInputStream(new URL(url).openStream());
@@ -60,29 +67,44 @@ public class FindYourBikeActivity extends AppCompatActivity {
                 // do nothing here
                 // hope to God it fucking works and there are no exceptions
             }
-        }*/
+        }
+        */
+        List<HashMap<String, String>> aList = new ArrayList<HashMap<String, String>>();
 
-        // bicycleScrollView = (ScrollView) findViewById(R.id.bicycleScrollView);
-        ImageView imageView1 = (ImageView) findViewById(R.id.imageView1);
-        //imageView1.setImageDrawable(getResources().getDrawable(R.drawable.logo));
-        int id = getResources().getIdentifier("com.example.helloworldbikefinder:bike", null, null);
-        imageView1.setImageResource(id);
+        for (int i = 0; i < 5; i++) {
+            HashMap<String, String> hm = new HashMap<String, String>();
+            hm.put("listview_location", listViewLocation[i]);
+            hm.put("listview_image", Integer.toString(listViewImage[i]));
+            aList.add(hm);
+        }
+
+        String[] from = {"listview_location", "listview_image"};
+        int[] to = {R.id.listview_location, R.id.listview_image};
+
+        SimpleAdapter simpleAdapter = new SimpleAdapter(getBaseContext(), aList, R.layout.listview_activity, from, to);
+        ListView listView = (ListView) findViewById(R.id.list_view);
+        listView.setAdapter(simpleAdapter);
+
+
+
     }
 
-   /*public void collectAllData() {
+
+   public void collectAllData() {
         AccessData access = new AccessData();
         data = access.accessData();
     }
 
+
     /**
      * Creates tabs for each object. Needs functionality for constant scrolling.
      */
-   /* public void createTabs() {
+   public void createTabs() {
         // updateUI to erase previous tabs
         // Create table layout
         for (int i = 0; i < data.size(); i++) {
             bikeTabs.add(new BikeTab(data.get(i), docIDs.get(i)));
         }
-        }*/
+   }
 
 }
