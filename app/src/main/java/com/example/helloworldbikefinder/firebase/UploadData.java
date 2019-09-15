@@ -43,8 +43,9 @@ public class UploadData {
     public void upload() {
         // Uploads the byte array of the image to firebase storage, which also returns downloadUrl
 
-
+        System.out.println("\n\n" + latitude + " " + longitude + "\n\n");
         uploadToFirebaseStorage(img);
+        System.out.println("\n\n" + downloadUrl);
 
         // Creates bike map consisting of its latitude, longitude, and the now acquired downloadUrl
         Map<String, Object> bike = new HashMap<>();
