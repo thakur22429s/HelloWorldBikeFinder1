@@ -86,7 +86,6 @@ public class FindYourBikeActivity extends AppCompatActivity {
         listView.setAdapter(simpleAdapter);
 
 
-
     }
 
 
