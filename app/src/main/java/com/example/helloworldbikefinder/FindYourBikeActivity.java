@@ -41,8 +41,8 @@ public class FindYourBikeActivity extends AppCompatActivity {
     ArrayList<String> docIDs;
     ArrayList<BikeTab> bikeTabs;
 
-    String[] listViewLocation = new String[]{"Location 1", "Location 2", "Location 3", "Location 4", "Location 5"};
-    int[] listViewImage = new int[]{R.drawable.logo, R.drawable.logo, R.drawable.logo, R.drawable.logo, R.drawable.logo};
+    String[] listViewLocation = new String[]{"WALC", "Lawson", "Engg. Fountain", "CL 1950 LH", "Bell Tower"};
+    int[] listViewImage = new int[]{R.drawable.bikey_on_sapling, R.drawable.bikes_hang_on_tree, R.drawable.limebike_tree_crop, R.drawable.bikey_on_tree, R.drawable.tree};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
