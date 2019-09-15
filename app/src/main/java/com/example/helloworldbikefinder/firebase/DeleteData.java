@@ -18,7 +18,7 @@ public class DeleteData {
         setDocumentKey(documentKey);
     }
 
-    public void deleteData(String documentKey) {
+    public void deleteData() {
         db.collection("bikes").document(documentKey)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

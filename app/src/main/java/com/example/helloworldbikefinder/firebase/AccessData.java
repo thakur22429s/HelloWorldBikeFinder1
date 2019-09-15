@@ -21,11 +21,10 @@ import static android.content.ContentValues.TAG;
 public class AccessData {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private ArrayList<Object> latitudes = new ArrayList<>();
-    private ArrayList<Object> longitudes = new ArrayList<>();
-    private ArrayList<Object> allBikesImg = new ArrayList<>();
+    private ArrayList<Map> data = new ArrayList<>();
+    private ArrayList<String> docIDs = new ArrayList<>();
 
-    public void accessData() {
+    public ArrayList<Map> accessData() {
         db.collection("bikes")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -35,26 +34,19 @@ public class AccessData {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                                 // Code for each specific document would go here
-                                Map data = document.getData();
-                                latitudes.add(data.get("latitude"));
-                                longitudes.add(data.get("longitude"));
-                                allBikesImg.add(data.get("downloadUrl"));
-                                String jsonString = convertToGeoJSON(data.get("latitude"), data.get("longitude"));
-                                Gson gson = new Gson();
-                                jsonString = gson.toJson(jsonString);
+                                data.add(document.getData());
+                                docIDs.add(document.getId());
+
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
                 });
+        return data;
     }
 
-    public String convertToGeoJSON(Object latitude, Object longitude) {
-        return "{\"type\": \"Feature\", \"geometry\": {\"type\": \"Point\", \"coordinates\": [" +
-                latitude + ", " + longitude + "]},properties: { \"name\": " + latitude + longitude + "} }";
 
-    }
 
 
 }
