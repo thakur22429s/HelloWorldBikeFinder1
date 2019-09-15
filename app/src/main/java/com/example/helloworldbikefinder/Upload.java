@@ -1,5 +1,7 @@
 package com.example.helloworldbikefinder;
 
+import java.util.*;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -43,12 +45,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-public class Upload extends AppCompatActivity {
+public class Upload<Latitude> extends AppCompatActivity {
     private File img;
     private LocationManager locationManager;
     private LocationListener locationListener;
     private String latitude;
     private String longitude;
+    private Button button3;
 
     // ImageView imageView;
 
@@ -72,7 +75,50 @@ public class Upload extends AppCompatActivity {
                 System.out.println("2");
             }
         });
+
+        Button locationBtn = (Button) findViewById(R.id.locationButton);
+        locationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                acquireLocation();
+            }
+        });
+
+        button3 = (Button) findViewById(R.id.locationButton);
+        final TextView textView = (TextView) findViewById(R.id.textView);
+
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                textView.append("\n" + location.getLatitude() + " " + location.getLongitude());
+
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+                Intent intent3 = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent3);
+
+
+            }
+        };
+
+        System.out.print("Latitude: " + latitude);
+        System.out.print("Longitude: " + longitude);
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
