@@ -51,6 +51,7 @@ public class FindYourBikeActivity extends AppCompatActivity {
      */
     public void createTabs() {
         // updateUI to erase previous tabs
+        // Create table layout
         for (int i = 0; i < data.size(); i++) {
             bikeTabs.add(new BikeTab(data.get(i), docIDs.get(i)));
         }

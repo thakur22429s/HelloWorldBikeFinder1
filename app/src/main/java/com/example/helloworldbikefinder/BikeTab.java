@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +23,7 @@ public class BikeTab extends AppCompatActivity {
     private Object downloadUrl;
     private String docID;
     private Button goBackBtn;
+    private ImageView imageView;
 
     public BikeTab(Map data, String docID) {
         setData(data);
@@ -33,6 +35,10 @@ public class BikeTab extends AppCompatActivity {
         return "{\"type\": \"Feature\", \"geometry\": {\"type\": \"Point\", \"coordinates\": [" +
                 latitude + ", " + longitude + "]},properties: { \"name\": " + latitude + longitude + "} }";
 
+    }
+
+    public void createMapImg() {
+        String url = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=15&size=300x300&maptype=roadmap &markers=color:blue%7Clabel:S%7C" + latitude + "," + longitude + " &key=AIzaSyC02hLIa7a-0kur1TxCdelBYXrbS99jqRs";
     }
 
     public void parseData() {
