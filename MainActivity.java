@@ -25,7 +25,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends AppCompatActivity {
-    private Button button;
+    private Button button3;
     private TextView textView;
     private LocationManager locationManager;
     private LocationListener locationListener;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = (Button) findViewById(R.id.button);
+        button3 = (Button) findViewById(R.id.button3);
         textView = (TextView) findViewById(R.id.textView);
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onProviderDisabled(String provider) {
-                Intent intent=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
+                Intent intent3=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent3);
 
 
             }

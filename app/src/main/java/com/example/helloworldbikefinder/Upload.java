@@ -78,23 +78,21 @@ public class Upload extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-        FileOutputStream out = null;
+        FileOutputStream out;
+        img = null;
         try {
-            out = new FileOutputStream("tmpimg.png");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-        try {
+            img = File.createTempFile("tmpimg.png", null, MainActivity.context.getCacheDir());
+            out = new FileOutputStream(img);
+            System.out.println((bitmap==null) + " " + out == null);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
             out.flush();
             out.close();
-        } catch (IOException e) {
+            uploadData();
+            System.out.println("3");
+        } catch (Exception e) {
             e.printStackTrace();
         }
         //imageView.setImageBitmap(bitmap); //For displaying the image after
-        img = new File("tmpimg.png");
-        uploadData();
-        System.out.println("3");
     }
 
     public void uploadData() {
