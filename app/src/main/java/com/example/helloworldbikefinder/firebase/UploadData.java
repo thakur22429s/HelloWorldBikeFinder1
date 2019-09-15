@@ -85,22 +85,24 @@ public class UploadData {
             @Override
             public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                 if (!task.isSuccessful()) {
+                    System.out.println("\n\nEXCEPTION\n\n");
                     throw task.getException();
                 }
 
 
                 // Continue with the task to get the download URL
+                System.out.println("\n\nGETTING DOWNLOAD\n\n");
                 return bikeRefs.getDownloadUrl();
             }
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
                 if (task.isSuccessful()) {
+                    System.out.println("\n\nDOWNLOAD ACCESSED\n\n");
                     Uri downloadUri = task.getResult();
                     downloadUrl = downloadUri.toString();
                 } else {
-                    // Handle failures
-                    // ...
+                    System.out.println("\n\nNo download url accessed\n\n");
                 }
             }
         });
