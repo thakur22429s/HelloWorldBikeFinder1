@@ -62,3 +62,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+/**
+
+ File localFile = File.createTempFile("images", "jpg");
+ riversRef.getFile(localFile)
+ .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+@Override
+public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+// Successfully downloaded data to local file
+// ...
+}
+}).addOnFailureListener(new OnFailureListener() {
+@Override
+public void onFailure(@NonNull Exception exception) {
+// Handle failed download
+// ...
+}
+});
+ **/

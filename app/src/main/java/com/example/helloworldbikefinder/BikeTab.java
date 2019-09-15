@@ -27,9 +27,17 @@ public class BikeTab extends AppCompatActivity {
 
     public BikeTab(Map data, String docID) {
         setData(data);
+        deCodeMap();
         setDocID(docID);
         parseData();
     }
+
+    public void deCodeMap() {
+        setLatitude(data.get("latitude"));
+        setLongitude(data.get("longitude"));
+        setDownloadUrl(data.get("downloadUrl"));
+    }
+
 
     public String convertToGeoJSON(Object latitude, Object longitude) {
         return "{\"type\": \"Feature\", \"geometry\": {\"type\": \"Point\", \"coordinates\": [" +

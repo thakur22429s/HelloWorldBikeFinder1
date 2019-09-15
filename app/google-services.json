@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "316781475603-c6lduko7fenl9mcongrqbgkl202q4g3e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.helloworldbikefinder",
+            "certificate_hash": "c8a98629e4d3901255b9fffcb893b560910576b7"
+          }
+        },
+        {
+          "client_id": "316781475603-aiog536i3mpl7m9359718stllcfebvf5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.helloworldbikefinder",
+            "certificate_hash": "b464170f439e77f6d3ae283d3d7249dabc5bb7a7"
+          }
+        },
+        {
           "client_id": "316781475603-pgfpku306mu6087lt8od3ikj6ga8k4do.apps.googleusercontent.com",
           "client_type": 3
         }
