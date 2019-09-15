@@ -30,7 +30,7 @@ public class UploadData {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String latitude;
     private String longitude;
-    private String downloadUrl;
+    private String downloadUrl2;
     private File img;
 
     public UploadData(File img, String latitude, String longitude) {
@@ -45,16 +45,13 @@ public class UploadData {
 
         System.out.println("\n\n" + latitude + " " + longitude + "\n\n");
         uploadToFirebaseStorage(img);
-        System.out.println("\n\n                                    DOWNLOAD URL:" + downloadUrl);
+        System.out.println("\n\n                                    DOWNLOAD URL:" + downloadUrl2);
 
         // Creates bike map consisting of its latitude, longitude, and the now acquired downloadUrl
-        Map<String, Object> bike = new HashMap<>();
-        bike.put("latitude", latitude);
-        bike.put("longitude", longitude);
-        bike.put("downloadUrl", downloadUrl);
+
 
         // Adds the bike object to the Cloud Firestore database
-        addToDatabase(bike);
+        //addToDatabase(bike);
 
     }
 
@@ -77,12 +74,15 @@ public class UploadData {
     }
 
     public void uploadToFirebaseStorage(File img) {
+        final String[] downloadUrl = new String[1];
         String path = "bikeImages/" + UUID.randomUUID() + ".png";
         StorageReference bikeRefs = storage.getReference(path);
         UploadTask uploadTask = bikeRefs.putFile(android.net.Uri.parse(img.toURI().toString()));
         StorageReference storageRef = storage.getReference();
         //final StorageReference imageRef = storageRef.child(path);
-
+        final Map<String, String> bike = new HashMap<>();
+        bike.put("latitude", latitude);
+        bike.put("longitude", longitude);
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -90,15 +90,28 @@ public class UploadData {
                 downloadUri.addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
-                        downloadUrl = downloadUri.getResult().toString();
+                        System.out.println( downloadUri.getResult().toString());
+                        downloadUrl[0] = downloadUri.getResult().toString();
+                        System.out.println(downloadUrl[0]);
+                        bike.put("downloadUrl", downloadUrl[0]);
+                        db.collection("bikes")
+                                .add(bike)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error adding document", e);
+                                    }
+                                });
                     }
                 });
             }
         });
-           
-
-
-
 
     }
 
@@ -119,11 +132,11 @@ public class UploadData {
     }
 
     public String getDownloadUrl() {
-        return downloadUrl;
+        return downloadUrl2;
     }
 
     public void setDownloadUrl(String downloadUrl) {
-        this.downloadUrl = downloadUrl;
+        this.downloadUrl2 = downloadUrl;
     }
 
     public void setImg(File img) {
