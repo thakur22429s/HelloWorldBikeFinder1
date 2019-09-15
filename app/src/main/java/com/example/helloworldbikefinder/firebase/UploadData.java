@@ -6,6 +6,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -78,8 +80,37 @@ public class UploadData {
         StorageReference bikeRefs = storage.getReference(path);
 
         UploadTask uploadTask = bikeRefs.putFile(android.net.Uri.parse(img.toURI().toString()));
-        Task task = bikeRefs.getDownloadUrl();
-        downloadUrl = task.toString();
+        UploadTask.TaskSnapshot taskSnapshot = uploadTask.getResult();
+        Uri uri = taskSnapshot.getUploadSessionUri();
+        downloadUrl = uri.toString();
+
+        /**
+        final StorageReference ref = bikeRefs.child("images/mountains.jpg");
+
+
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                // Continue with the task to get the download URL
+                return ref.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    downloadUrl = downloadUri.toString();
+                } else {
+                    // Handle failures
+                    // ...
+                }
+            }
+        });
+         **/
 
 
     }
