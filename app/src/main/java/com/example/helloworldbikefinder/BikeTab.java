@@ -21,7 +21,7 @@ public class BikeTab extends AppCompatActivity {
     private Object longitude;
     private Object downloadUrl;
     private String docID;
-    private Button button;
+    private Button goBackBtn;
 
     public BikeTab(Map data, String docID) {
         setData(data);
@@ -58,14 +58,17 @@ public class BikeTab extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_bike_tab);
 
-        button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        goBackBtn = (Button)findViewById(R.id.button);
+        goBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goBack();
             }
         });
+
     }
+
+
 
     public void goBack() {
         Intent intent = new Intent(this, FindYourBikeActivity.class);
